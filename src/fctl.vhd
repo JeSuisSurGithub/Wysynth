@@ -26,7 +26,7 @@ architecture behav of fctl is
                     count_max <= shift_right(count_max, 1);
                 end if;
 
-                if downbuf = '0' and down = '1' and count_max < 2049 then
+                if downbuf = '0' and down = '1' and count_max < 4097 then
                     count_max <= shift_left(count_max, 1);
                 end if;
 

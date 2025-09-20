@@ -19,7 +19,8 @@ architecture behav of saw is
                 else
                     addr <= to_unsigned(0, 8);
                 end if;
-                data <= std_logic_vector(addr); -- SAW
             end if;
         end process;
+        data <= "11111111" when addr < 128 else "00000000"; -- SQUARE
+        --data <= std_logic_vector(addr); -- SAW
     end behav;

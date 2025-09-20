@@ -4,9 +4,9 @@
     <Version>beta</Version>
     <Device id="GW2AR-18C" package="QFN88" speed="8" partNumber="GW2AR-LV18QN88C8/I7"/>
     <FileList>
-        <File path="/home/jutilisepingouin/Zepha/Programmation/fpga/synth/src/synth.vhd" type="vhdl"/>
-        <File path="/home/jutilisepingouin/Zepha/Programmation/fpga/synth/src/rom.vhd" type="vhdl"/>
         <File path="/home/jutilisepingouin/Zepha/Programmation/fpga/synth/src/fctl.vhd" type="vhdl"/>
+        <File path="/home/jutilisepingouin/Zepha/Programmation/fpga/synth/src/rom.vhd" type="vhdl"/>
+        <File path="/home/jutilisepingouin/Zepha/Programmation/fpga/synth/src/synth.vhd" type="vhdl"/>
     </FileList>
     <OptionList>
         <Option type="disable_insert_pad" value="0"/>
