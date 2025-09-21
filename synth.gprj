@@ -7,6 +7,7 @@
     <FileList>
         <File path="src/fctl.vhd" type="file.vhdl" enable="1"/>
         <File path="src/rom.vhd" type="file.vhdl" enable="1"/>
+        <File path="src/spi.vhd" type="file.vhdl" enable="1"/>
         <File path="src/synth.vhd" type="file.vhdl" enable="1"/>
         <File path="src/synth.cst" type="file.cst" enable="1"/>
     </FileList>

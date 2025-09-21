@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Module name="synth" T_Register="41(0)" T_Alu="52(0)" T_Lut="32(0)">
- <SubModule name="fctrl" Register="33" Alu="45" Lut="27" T_Register="33(33)" T_Alu="45(45)" T_Lut="27(27)"/>
- <SubModule name="saw" Register="8" Alu="7" Lut="5" T_Register="8(8)" T_Alu="7(7)" T_Lut="5(5)"/>
-</Module>

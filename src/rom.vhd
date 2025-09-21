@@ -11,7 +11,11 @@ end entity;
 
 architecture behav of saw is
     signal addr: unsigned(7 downto 0) := "00000000";
+
     begin
+        -- data <= "11111111" when addr < 128 else "00000000"; -- SQUARE
+        data <= std_logic_vector(addr); -- SAW
+
         process(clk) begin
             if rising_edge(clk) then
                 if addr < 255 then
@@ -21,6 +25,4 @@ architecture behav of saw is
                 end if;
             end if;
         end process;
-        data <= "11111111" when addr < 128 else "00000000"; -- SQUARE
-        --data <= std_logic_vector(addr); -- SAW
     end behav;

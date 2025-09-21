@@ -11,31 +11,32 @@ end entity;
 
 architecture behav of fctl is
     signal counter: unsigned(15 downto 0) := to_unsigned(0, 16);
-    signal count_max: unsigned(15 downto 0) := to_unsigned(1024, 16); -- (27MHz / (50Hz * 256)) * 2 = 4218 ~ 4096
-    signal nclkbuf, upbuf, downbuf: std_logic := '0'; 
+     -- (27MHz / (25Hz * 256)) * 2 = 8437 ~ 8192
+    signal count_max: unsigned(15 downto 0) := to_unsigned(1024, 16);
+    signal nclk_reg, up_reg, down_reg: std_logic := '0';
 
     begin
-        nclk <= nclkbuf;
+        nclk <= nclk_reg;
 
         process(clk) begin
             if rising_edge(clk) then
-                upbuf <= up;
-                downbuf <= down;
+                up_reg <= up;
+                down_reg <= down;
 
-                if upbuf = '0' and up = '1' and count_max > 31 then
+                if up_reg = '0' and up = '1' and count_max > 63 then
                     count_max <= shift_right(count_max, 1);
                 end if;
 
-                if downbuf = '0' and down = '1' and count_max < 4097 then
+                if down_reg = '0' and down = '1' and count_max < 4097 then
                     count_max <= shift_left(count_max, 1);
                 end if;
 
                 if counter < count_max/2 then
                     counter <= counter + 1;
-                    nclkbuf <= '0';
+                    nclk_reg <= '0';
                 elsif counter < count_max then
                     counter <= counter + 1;
-                    nclkbuf <= '1';
+                    nclk_reg <= '1';
                 else
                     counter <= to_unsigned(0, 16);
                 end if;
