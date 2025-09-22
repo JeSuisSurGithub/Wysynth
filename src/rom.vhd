@@ -2,19 +2,20 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity saw is
+entity osc is
     port(
-        clk: in std_logic;
+        clk, sel: in std_logic;
         data: out std_logic_vector(7 downto 0)
     );
 end entity;
 
-architecture behav of saw is
+architecture behav of osc is
     signal addr: unsigned(7 downto 0) := "00000000";
 
     begin
-        -- data <= "11111111" when addr < 128 else "00000000"; -- SQUARE
-        data <= std_logic_vector(addr); -- SAW
+        data <= "11111111" when sel = '1' and addr < 128 else
+            "00000000" when sel = '1' else
+            std_logic_vector(addr);
 
         process(clk) begin
             if rising_edge(clk) then
