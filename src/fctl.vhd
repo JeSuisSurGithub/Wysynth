@@ -4,7 +4,8 @@ use ieee.numeric_std.all;
 
 entity fctl is
     port(
-        clk, up, down: in std_logic;
+        clk: in std_logic;
+        key: in unsigned(7 downto 0);
         clkout: out std_logic
     );
 end entity;
@@ -56,10 +57,9 @@ architecture behav of fctl is
         41 => to_unsigned(106, 16), -- B6 1975.53
         others => to_unsigned(1612, 16) -- C3
     );
-    signal key: unsigned(7 downto 0) := to_unsigned(0, 8);
     signal cnt: unsigned(15 downto 0) := to_unsigned(0, 16);
     signal key_div: unsigned(15 downto 0);
-    signal clkout_reg, up_reg, down_reg: std_logic := '0';
+    signal clkout_reg: std_logic := '0';
 
     begin
         clkout <= clkout_reg;
@@ -67,22 +67,6 @@ architecture behav of fctl is
 
         process(clk) begin
             if rising_edge(clk) then
-                up_reg <= up;
-                down_reg <= down;
-
-                -- Latching
-                if key > 0 and key < 41 then
-                    if up_reg = '0' and up = '1' then
-                        key <= key + 1;
-                    end if;
-
-                    if down_reg = '0' and down = '1' then
-                        key <= key - 1;
-                    end if;
-                else
-                    key <= to_unsigned(14, 8);
-                end if;
-
                 if cnt < key_div/2 then
                     cnt <= cnt + 1;
                     clkout_reg <= '0';
