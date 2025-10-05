@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
 import math
 
-white_keys = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
 note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
 A4_index = note_names.index('A') + 4 * 12  # = 57
@@ -11,7 +11,7 @@ def get_frequency(note_index):
 
 notes_table = []
 for octave in range(1, 6 + 1):
-    for name in white_keys:
+    for name in note_names:
         note_index = note_names.index(name) + octave * 12
         notes_table.append((f"{name}{octave}", get_frequency(note_index)))
 

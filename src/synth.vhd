@@ -39,25 +39,25 @@ architecture behav of synth is
 
         send_data <= data when data_en = '1' else "01111111";
 
-        -- Melody
+        -- Melody C4 G4 B4 C5
         process(mclk) begin
             if rising_edge(mclk) then
                 cnt <= cnt + 1;
                 if cnt < 3375000 then
                     data_en <= '1';
-                    key <= to_unsigned(21, 8);
+                    key <= to_unsigned(36, 8);
                     debug <= "10000";
                 elsif cnt > 3375000*2 and cnt < 3375000*3  then
                     data_en <= '1';
-                    key <= to_unsigned(28, 8);
+                    key <= to_unsigned(43, 8);
                     debug <= "01000";
                 elsif cnt > 3375000*4 and cnt < 3375000*5 then
                     data_en <= '1';
-                    key <= to_unsigned(14, 8);
+                    key <= to_unsigned(47, 8);
                     debug <= "00100";
                 elsif cnt > 3375000*6 and cnt < 3375000*7 then
                     data_en <= '1';
-                    key <= to_unsigned(7, 8);
+                    key <= to_unsigned(48, 8);
                     debug <= "00010";
                 elsif cnt = 3375000*8 - 1 then
                     cnt <= to_unsigned(0, 32);
