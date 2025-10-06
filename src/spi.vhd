@@ -4,14 +4,14 @@ use ieee.numeric_std.all;
 
 entity spi_dac is
     port(
-        clk, send: in  std_logic; -- 27Mhz
+        clk, send: in std_logic; -- 96MHz
         data_in: in std_logic_vector(7 downto 0);
         sdi, sck, cs_n, busy: out std_logic -- Busy on high
     );
 end spi_dac;
 
 architecture behav of spi_dac is
-    constant clk_div: integer := 27; -- 1MHz
+    constant clk_div: integer := 96; -- 1MHz
     signal cnt: integer := 0;
 
     signal sck_en: std_logic := '0';
