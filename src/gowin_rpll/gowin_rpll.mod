@@ -7,7 +7,7 @@
 
 -mod_name Gowin_rPLL
 -file_name gowin_rpll
--path /home/jesuissurpingouin/Zepha/Programmation/fpga/synth/src/gowin_rpll/
+-path /home/jesuissurpingouin/Zepha/Programmation/fpga/Wysynth/src/gowin_rpll/
 -type PLL
 -rPll true
 -file_type vhdl

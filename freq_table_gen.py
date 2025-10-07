@@ -2,24 +2,26 @@
 
 import math
 
-clock_freq = 96000000
-bit_resolution = 256
-note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+CLOCK = 96_000_000
+BIT_DEPTH = 8
 
-A4_index = note_names.index('A') + 4 * 12  # = 57
-A4_freq = 440.0
+NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+A4_INDEX = NOTES.index('A') + 4 * 12  # = 57
+A4_FREQ = 440.0
 
 def get_frequency(note_index):
-    return round(A4_freq * (2 ** ((note_index - A4_index) / 12)), 2)
+    return round(A4_FREQ * (2 ** ((note_index - A4_INDEX) / 12)), 2)
 
-notes_table = []
-for octave in range(0, 9 + 1):
-    for name in note_names:
-        note_index = note_names.index(name) + octave * 12
-        notes_table.append((f"{name}{octave}", get_frequency(note_index)))
+def print_clkdiv():
+    notes_table = list()
+    for octave in range(0, 9+1):
+        for note in NOTES:
+            note_index = NOTES.index(note) + octave * 12
+            notes_table.append((f"{note}{octave}", get_frequency(note_index)))
 
-i = 0
-for name,freq in notes_table:
-    clock_divider = int(round((clock_freq * 2) / (bit_resolution * freq)))
-    print(f"\t\t{i} => to_unsigned({clock_divider}, 16), -- {name} {freq}Hz")
-    i += 1
+    for i, (name, freq) in enumerate(notes_table):
+        clock_divider = int(round((CLOCK * 2) / (2**BIT_DEPTH * freq)))
+        print(f"\t\t{i} => to_unsigned({clock_divider}, 16), -- {name} {freq}Hz")
+
+if __name__ == "__main__":
+    print_clkdiv()

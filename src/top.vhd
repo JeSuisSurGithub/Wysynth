@@ -2,15 +2,15 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity synth is
+entity top is
     port(
-        mclk, wavesel, rst, rx: in std_logic; -- 27MHz Master Clock
-        tx, sdi, sck, cs_n: out std_logic;
-        debug: out std_logic_vector(5 downto 0)
+        iclk, wavesel, rst, rx: in std_logic; -- 27MHz Input Clock, UART RX
+        tx, sdi, sck, cs_n: out std_logic; -- UART TX, MCP4921 SPI
+        debug: out std_logic_vector(5 downto 0) -- Truncated current note indicator
     );
 end entity;
 
-architecture behav of synth is
+architecture behav of top is
     signal clk96: std_logic;
 
     signal rx_data: std_logic_vector(7 downto 0);
@@ -36,7 +36,7 @@ architecture behav of synth is
         debug <= tx_data(6 downto 1);
 
         grpll: entity work.Gowin_rPLL(Behavioral)
-            port map(clkout => clk96, clkin => mclk);
+            port map(clkout => clk96, clkin => iclk);
 
         uart_rx_inst: entity work.uart_rx
             port map (clk => clk96, rst => rst,
@@ -46,7 +46,7 @@ architecture behav of synth is
             port map (clk => clk96, rst => rst,
                 tx_start => tx_start, data_in => tx_data, tx => tx, busy => tx_busy);
 
-        fctl : entity work.fctl(behav)
+        key2clk: entity work.key2clk(behav)
             port map(
                 clk => clk96, key => key, clkout => oscclk);
 

@@ -6,7 +6,7 @@ entity spi_dac is
     port(
         clk, send: in std_logic; -- 96MHz
         data_in: in std_logic_vector(7 downto 0);
-        sdi, sck, cs_n, busy: out std_logic -- Busy on high
+        sdi, sck, cs_n, busy: out std_logic -- MCP4921, busy flag active on high
     );
 end spi_dac;
 

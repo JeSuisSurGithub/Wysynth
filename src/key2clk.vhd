@@ -2,15 +2,15 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity fctl is
+entity key2clk is
     port(
-        clk: in std_logic;
-        key: in unsigned(7 downto 0);
-        clkout: out std_logic
+        clk: in std_logic; -- 96MHz
+        key: in unsigned(7 downto 0); -- Valid between 0 and 119 (included)
+        clkout: out std_logic -- Clock for 256 point wavetable
     );
 end entity;
 
-architecture behav of fctl is
+architecture behav of key2clk is
     type div is array(0 to 255) of unsigned(15 downto 0);
     constant div_table: div := (
 		0 => to_unsigned(45871, 16), -- C0 16.35Hz

@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity osc is
     port(
-        clk, sel: in std_logic;
+        clk, sel: in std_logic; -- 96MHz, SEL=0 SAW, SEL=1 SQU
         data: out std_logic_vector(7 downto 0)
     );
 end entity;

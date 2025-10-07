@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity uart_rx is
     port(
-        clk, rst, rx: in std_logic;
+        clk, rst, rx: in std_logic; -- 96MHz, RX to HM-10 TX
         data_out: out std_logic_vector(7 downto 0);
-        data_ready: out std_logic
+        data_ready: out std_logic -- Ready on high
     );
 end uart_rx;
 
